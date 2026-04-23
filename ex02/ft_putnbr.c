@@ -6,11 +6,33 @@
 /*   By: casampai <casampai@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/21 18:44:26 by casampai          #+#    #+#             */
-/*   Updated: 2026/04/21 18:45:15 by casampai         ###   ########.fr       */
+/*   Updated: 2026/04/23 18:38:50 by casampai         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <unistd.h>
+
 void	ft_putnbr(int nb)
 {
-	
+    char n;
+	if(nb == -2147483648)
+    {
+        write(1, "-2147483648", 12);
+        return;
+    }
+    if(nb < 0)
+    {
+        write(1, "-", 1);
+        nb *= -1;
+    }
+    if(nb >= 10)
+        ft_putnbr(nb / 10);
+    n = (nb % 10) + '0';
+    write(1, &n, 1);
+}
+
+int main(void)
+{
+    ft_putnbr(123);
+    return (0);
 }
